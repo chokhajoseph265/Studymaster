@@ -265,6 +265,7 @@ const AppContent: React.FC = () => {
 
   // Track live announcements to dispatch toast notification when new notices arrive
   const prevAnnouncementIdsRef = useRef<string[]>([]);
+  const hasInitializedAnnouncementsRef = useRef<boolean>(false);
   useEffect(() => {
     if (announcements.length > 0) {
       if (prevAnnouncementIdsRef.current.length > 0) {
@@ -273,14 +274,23 @@ const AppContent: React.FC = () => {
         );
         if (newItems.length > 0) {
           const latest = newItems[0];
+          const isPastPaper = latest.category === 'Past Papers' || latest.actionType === 'past_papers' || !!latest.targetPaperId;
           notificationService.showToast({
             id: latest.id,
             title: latest.title,
             message: latest.message,
             type: latest.type === 'exam_alert' ? 'exam_alert' : latest.type === 'timetable' ? 'timetable' : 'announcement',
-            category: latest.category || 'Official Announcement',
-            actionText: 'View Notice',
-            onAction: () => setShowNotificationsModal(true)
+            category: latest.category || (isPastPaper ? 'Past Papers' : 'Official Announcement'),
+            actionText: latest.actionText || (isPastPaper ? 'Open Past Paper' : 'View Notice'),
+            onAction: () => {
+              if (isPastPaper && latest.targetPaperId) {
+                handleNotificationAction('past_papers', latest.targetPaperId);
+              } else if (latest.actionType) {
+                handleNotificationAction(latest.actionType, latest.targetPaperId);
+              } else {
+                setShowNotificationsModal(true);
+              }
+            }
           });
           if (notificationService.getBrowserPermission() === 'granted') {
             notificationService.sendBrowserNotification(latest.title, {
@@ -290,15 +300,27 @@ const AppContent: React.FC = () => {
         }
       }
       prevAnnouncementIdsRef.current = announcements.map((a) => a.id);
+      hasInitializedAnnouncementsRef.current = true;
     }
   }, [announcements, readNotificationIds]);
 
-  const handleNotificationAction = (actionType: string) => {
+  const handleNotificationAction = async (actionType: string, paperId?: string) => {
     if (actionType === 'planner' || actionType === 'past_papers') {
       setActiveTab('past_papers');
       setSelectedTopic(null);
       setSelectedSubject(null);
       setShowExamTips(false);
+      if (paperId) {
+        try {
+          const papers = await api.getPastPapers(undefined, undefined, undefined, undefined, false);
+          const matched = papers.find((p) => p.id === paperId);
+          if (matched) {
+            setSelectedPastPaper(matched);
+          }
+        } catch {
+          // ignore
+        }
+      }
     } else if (actionType === 'leaderboard') {
       setActiveTab('leaderboard');
     } else if (actionType === 'chemistry') {
@@ -348,6 +370,36 @@ const AppContent: React.FC = () => {
           }
         } catch {
           // ignore
+        }
+      }
+
+      // When a past paper is published by admin, display immediate student alert
+      if (event.type === 'past_papers_updated' && event.payload?.paper) {
+        const paper: PastPaper = event.payload.paper;
+        if (paper.status === 'published' || event.payload?.action === 'published') {
+          const paperLabel = `${paper.year} ${paper.category} ${paper.subjectName} (${paper.paperNumber})`;
+          notificationService.showToast({
+            id: `toast-paper-${paper.id}-${Date.now()}`,
+            title: `📄 New Past Paper Published!`,
+            message: `${paperLabel} is now ready for revision with worked marking rubrics. Tap to practice!`,
+            type: 'exam_alert',
+            category: 'Past Paper Alert',
+            actionText: 'Open Past Paper',
+            onAction: () => {
+              setSelectedPastPaper(paper);
+              setActiveTab('past_papers');
+              setSelectedSubject(null);
+              setSelectedTopic(null);
+              setShowExamTips(false);
+            },
+            durationMs: 9000
+          });
+
+          if (notificationService.getBrowserPermission() === 'granted') {
+            notificationService.sendBrowserNotification(`New ${paper.category} Past Paper Published!`, {
+              body: `${paper.year} ${paper.subjectName} (${paper.paperNumber}) is now available in StudyMaster.`
+            });
+          }
         }
       }
     });

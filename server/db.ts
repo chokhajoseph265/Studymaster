@@ -1123,16 +1123,69 @@ class StudyMasterDatabase {
     return quiz;
   }
 
+  public notifyStudentsOfPublishedPaper(paper: PastPaper, adminUsername: string) {
+    try {
+      const formLevel = (paper.form || paper.formLevel || 'Form 4') as FormLevel;
+      const paperLabel = `${paper.year} ${paper.category} ${paper.subjectName} ${paper.paperNumber}`;
+      const annId = `ann-paper-${paper.id}`;
+
+      const announcement: Announcement = {
+        id: annId,
+        title: `📄 New Past Paper: ${paperLabel}`,
+        message: `Official ${paper.category} examination paper for ${paper.subjectName} (${formLevel}) has been published with questions and marking guide. Tap to practice now!`,
+        type: 'exam_alert',
+        category: 'Past Papers',
+        targetForm: formLevel,
+        isPinned: true,
+        actionText: 'View Past Paper',
+        actionType: 'past_papers',
+        targetPaperId: paper.id,
+        attachment: paper.downloadUrl ? {
+          name: `${paper.year}_${paper.category}_${paper.subjectName}_${paper.paperNumber}.pdf`.replace(/\s+/g, '_'),
+          type: 'pdf',
+          mimeType: 'application/pdf',
+          dataUrl: paper.downloadUrl
+        } : undefined,
+        createdAt: new Date().toISOString(),
+        active: true
+      };
+
+      const existingAnnIdx = this.db.announcements.findIndex((a) => a.id === annId || a.targetPaperId === paper.id);
+      if (existingAnnIdx !== -1) {
+        this.db.announcements[existingAnnIdx] = announcement;
+      } else {
+        this.db.announcements.unshift(announcement);
+      }
+
+      this.logAdminAction(
+        adminUsername,
+        'Notification Sent',
+        'PastPaper',
+        paper.id,
+        `Student broadcast alert dispatched for published past paper: ${paperLabel}`
+      );
+    } catch (err) {
+      console.warn('Could not generate past paper announcement:', err);
+    }
+  }
+
   public addPastPaper(paper: PastPaper, adminUsername: string) {
     const existingIdx = this.db.pastPapers.findIndex((p) => p.id === paper.id);
     if (existingIdx !== -1) {
+      const prevStatus = this.db.pastPapers[existingIdx].status;
       this.db.pastPapers[existingIdx] = { ...this.db.pastPapers[existingIdx], ...paper };
       this.logAdminAction(adminUsername, 'Updated Past Paper', 'PastPaper', paper.id, `Updated ${paper.category} ${paper.year} ${paper.subjectName}`);
+      if (prevStatus !== 'published' && paper.status === 'published') {
+        this.notifyStudentsOfPublishedPaper(this.db.pastPapers[existingIdx], adminUsername);
+      }
       this.persist();
       return this.db.pastPapers[existingIdx];
     }
     this.db.pastPapers.unshift(paper);
     this.logAdminAction(adminUsername, 'Uploaded Past Paper', 'PastPaper', paper.id, `Uploaded ${paper.category} ${paper.year} ${paper.subjectName} ${paper.paperNumber}`);
+    if (paper.status === 'published') {
+      this.notifyStudentsOfPublishedPaper(paper, adminUsername);
+    }
     this.persist();
     return paper;
   }
@@ -1140,8 +1193,12 @@ class StudyMasterDatabase {
   public updatePastPaper(id: string, updates: Partial<PastPaper>, adminUsername: string) {
     const idx = this.db.pastPapers.findIndex((p) => p.id === id);
     if (idx !== -1) {
+      const prevStatus = this.db.pastPapers[idx].status;
       this.db.pastPapers[idx] = { ...this.db.pastPapers[idx], ...updates };
       this.logAdminAction(adminUsername, 'Updated Past Paper', 'PastPaper', id, `Updated past paper status or details`);
+      if (prevStatus !== 'published' && this.db.pastPapers[idx].status === 'published') {
+        this.notifyStudentsOfPublishedPaper(this.db.pastPapers[idx], adminUsername);
+      }
       this.persist();
       return this.db.pastPapers[idx];
     }

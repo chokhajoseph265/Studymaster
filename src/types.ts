@@ -506,7 +506,10 @@ export interface Announcement {
   type: 'info' | 'exam_alert' | 'update' | 'motivation' | 'timetable' | 'official_notice';
   targetForm?: FormLevel | 'All Forms';
   isPinned?: boolean; // Pinned announcements stay on top with a distinct gold/emerald pinned badge
-  category?: 'General' | 'MANEB Timetable' | 'Examination Alert' | 'Curriculum Notice' | 'Academic Update';
+  category?: 'General' | 'MANEB Timetable' | 'Examination Alert' | 'Curriculum Notice' | 'Academic Update' | 'Past Papers' | string;
+  actionText?: string;
+  actionType?: 'past_papers' | 'planner' | 'chemistry' | 'leaderboard' | string;
+  targetPaperId?: string;
   attachmentUrl?: string; // Compatibility alias
   // Direct File Attachment from device (image, document/pdf, etc.)
   attachment?: {

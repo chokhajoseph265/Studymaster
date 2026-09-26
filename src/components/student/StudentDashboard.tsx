@@ -14,6 +14,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Subject, FormLevel, Announcement, PastPaper } from '../../types';
 import { INITIAL_SUBJECTS, INITIAL_TOPICS } from '../../data/initialData';
 import { api } from '../../services/api';
+import { syncManager } from '../../services/syncManager';
 
 interface StudentDashboardProps {
   onSelectSubject?: (subject: Subject) => void;
@@ -128,19 +129,31 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
   useEffect(() => {
     let isMounted = true;
-    api
-      .getPastPapers()
-      .then((papers) => {
-        if (isMounted && papers) {
-          const published = papers.filter(
-            (p) => p.status !== 'draft' && p.status !== 'deactivated'
-          );
-          setRecentPapers(published.slice(0, 3));
-        }
-      })
-      .catch(() => {});
+    const fetchRecentPapers = () => {
+      api
+        .getPastPapers()
+        .then((papers) => {
+          if (isMounted && papers) {
+            const published = papers.filter(
+              (p) => p.status !== 'draft' && p.status !== 'deactivated'
+            );
+            setRecentPapers(published.slice(0, 3));
+          }
+        })
+        .catch(() => {});
+    };
+
+    fetchRecentPapers();
+
+    const unsubscribe = syncManager.subscribe((event) => {
+      if (event.type === 'past_papers_updated' || event.type === 'general_sync') {
+        fetchRecentPapers();
+      }
+    });
+
     return () => {
       isMounted = false;
+      unsubscribe();
     };
   }, []);
 

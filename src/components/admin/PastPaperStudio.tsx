@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { PastPaper, Subject, FormLevel } from '../../types';
 import { api } from '../../services/api';
+import { syncManager } from '../../services/syncManager';
 
 interface PastPaperStudioProps {
   subjects: Subject[];
@@ -363,9 +364,13 @@ export const PastPaperStudio: React.FC<PastPaperStudioProps> = ({
       await api.saveAdminPastPaper(payload, isEdit);
       showToast(
         payload.status === 'published'
-          ? (isEdit ? 'Paper updated and published to student app!' : 'Paper published! Now live in the student app.')
+          ? (isEdit ? 'Paper updated & student notification sent!' : 'Paper published! Notification sent to student app.')
           : 'Draft paper saved.'
       );
+      if (payload.status === 'published') {
+        syncManager.broadcast('past_papers_updated', 'admin', { paper: payload, action: 'published' });
+        syncManager.broadcast('announcements_updated', 'admin');
+      }
       setShowEditorModal(false);
       setEditingPaper(null);
       await loadPapers();
@@ -400,7 +405,13 @@ export const PastPaperStudio: React.FC<PastPaperStudioProps> = ({
       setPapers((prev) =>
         prev.map((p) => (p.id === paper.id ? { ...p, status: newStatus } : p))
       );
-      showToast(`Paper marked as ${newStatus}.`);
+      if (newStatus === 'published') {
+        showToast(`Paper published! Notification sent to student app.`);
+        syncManager.broadcast('past_papers_updated', 'admin', { paper: { ...paper, status: newStatus }, action: 'published' });
+        syncManager.broadcast('announcements_updated', 'admin');
+      } else {
+        showToast(`Paper reverted to draft.`);
+      }
     } catch (err) {
       console.error('Status toggle failed:', err);
       showToast('Failed to update paper status.');

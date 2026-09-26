@@ -4011,22 +4011,24 @@
   ],
   "pastPapers": [
     {
-      "id": "paper-1790436804745",
-      "title": "2024",
-      "subjectId": "subj-agri",
-      "subjectName": "Agriculture",
+      "id": "paper-1790438217047",
+      "title": "2026 MANEB MSCE History Paper 1 (Theory)",
+      "subjectId": "subj-history",
+      "subjectName": "History",
       "form": "Form 4",
       "year": 2026,
-      "paperNumber": "Paper 1 (Theory)",
       "category": "MSCE",
-      "description": "Official MANEB examination paper with questions, instructions, and marks distribution.",
-      "fileSizeMb": 0.49,
-      "downloadUrl": "/downloads/past-papers/1790437073614-Welcoming_function_program.pdf",
+      "paperNumber": "Paper 1 (Theory)",
+      "fileName": "2026 History 1 MSCE.pdf",
+      "fileSizeMb": 2.46,
+      "fileSizeBytes": 2578416,
+      "downloadUrl": "/downloads/past-papers/1790438217504-2026_History_1_MSCE.pdf",
+      "description": "Official MANEB MSCE examination paper with complete questions and syllabus scope.",
       "hasMarkingGuide": true,
       "markingGuideSummary": "Includes detailed step-by-step mark allocations and expected answers.",
       "offlineAvailable": true,
       "status": "published",
-      "downloadCount": 0,
+      "downloadCount": 1,
       "uploadedAt": "2026-09-26",
       "questionsExcerpt": [
         {
@@ -4040,616 +4042,43 @@
           "marks": 10
         }
       ],
-      "fileName": "Welcoming function program.pdf",
-      "fileSizeBytes": 513451
+      "formLevel": "Form 4",
+      "hasMarkingScheme": true
     },
     {
-      "id": "paper-msce-math-2024-p1",
-      "subjectId": "subj-math",
-      "subjectName": "Mathematics",
+      "id": "paper-1790438097038",
+      "title": "2024",
+      "subjectId": "subj-agri",
+      "subjectName": "Agriculture",
       "form": "Form 4",
-      "year": 2024,
-      "paperNumber": "Paper 1",
-      "category": "MSCE",
-      "title": "2024 MANEB MSCE Mathematics Paper 1",
-      "description": "Official MANEB MSCE examination covering algebra, arithmetic, quadratic equations, geometry, trigonometry, and statistics.",
-      "fileSizeMb": 1.8,
-      "downloadUrl": "/downloads/msce-math-2024-p1.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Includes detailed step-by-step mark allocations for Section A (50 marks) and Section B (50 marks).",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 342,
-      "uploadedAt": "2025-01-10",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Evaluate: 3 1/2 + 2 1/4 ÷ 1 1/8 without using a calculator.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "Solve the equation: 2x² - 7x + 3 = 0 using the quadratic formula.",
-          "marks": 6
-        },
-        {
-          "qNumber": 3,
-          "text": "In triangle ABC, AB = 8 cm, AC = 11 cm and angle BAC = 64°. Calculate the length of BC.",
-          "marks": 6
-        },
-        {
-          "qNumber": 4,
-          "text": "A line passes through (2, 5) and is perpendicular to 3x - 2y = 8. Find its equation.",
-          "marks": 5
-        }
-      ]
-    },
-    {
-      "id": "paper-msce-phys-2024-p1",
-      "subjectId": "subj-physics",
-      "subjectName": "Physics",
-      "form": "Form 4",
-      "year": 2024,
-      "paperNumber": "Paper 1 (Theory & Structured)",
-      "category": "MSCE",
-      "title": "2024 MANEB MSCE Physics Theory",
-      "description": "Covers kinematics, dynamics, work and power, current electricity, electromagnetic induction, and optics.",
-      "fileSizeMb": 2.1,
-      "downloadUrl": "/downloads/msce-phys-2024-p1.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Full marking scheme with expected chemical equations and numerical derivations.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 289,
-      "uploadedAt": "2025-01-12",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "State Newton’s Second Law of Motion and derive the formula F = ma.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "Calculate the resistance of a 1.5 m nichrome wire of cross-sectional area 2.0 x 10⁻⁷ m² if resistivity is 1.1 x 10⁻⁶ Ωm.",
-          "marks": 5
-        },
-        {
-          "qNumber": 3,
-          "text": "A step-down transformer has 1200 primary turns and 60 secondary turns. If the input voltage is 240 V, calculate the output voltage.",
-          "marks": 5
-        }
-      ]
-    },
-    {
-      "id": "paper-msce-chem-2024-p1",
-      "subjectId": "subj-chem",
-      "subjectName": "Chemistry",
-      "form": "Form 4",
-      "year": 2024,
-      "paperNumber": "Paper 1 (Theory & Practical Analysis)",
-      "category": "MSCE",
-      "title": "2024 MANEB MSCE Chemistry Theory",
-      "description": "Covers atomic structure, ionic and covalent bonding, mole concept, acid-base titrations, electrochemistry, and organic fuels.",
-      "fileSizeMb": 2,
-      "downloadUrl": "/downloads/msce-chem-2024-p1.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Full marking scheme with balanced chemical equations, state symbols, and stoichiometry steps.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 265,
-      "uploadedAt": "2025-01-14",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "State the difference between isotopes and allotropes with two suitable examples.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "In a titration, 25.0 cm³ of 0.1 mol/dm³ NaOH neutralises 20.0 cm³ of HCl. Calculate the concentration of the acid.",
-          "marks": 5
-        },
-        {
-          "qNumber": 3,
-          "text": "Explain using Le Chatelier principle the effect of increasing pressure on the Haber process: N₂ + 3H₂ ⇌ 2NH₃.",
-          "marks": 5
-        }
-      ]
-    },
-    {
-      "id": "paper-jce-math-2024-p1",
-      "subjectId": "subj-math",
-      "subjectName": "Mathematics",
-      "form": "Form 2",
-      "year": 2024,
-      "paperNumber": "Paper 1",
-      "category": "JCE",
-      "title": "2024 MANEB JCE Mathematics Paper",
-      "description": "Junior Certificate of Education national examination for Form 2 students.",
-      "fileSizeMb": 1.4,
-      "downloadUrl": "/downloads/jce-math-2024-p1.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Complete model answers with common student pitfalls highlighted.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 415,
-      "uploadedAt": "2025-01-05",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Express 0.3636... as a fraction in its lowest terms.",
-          "marks": 3
-        },
-        {
-          "qNumber": 2,
-          "text": "Find the size of the interior angle of a regular 8-sided polygon (octagon).",
-          "marks": 4
-        },
-        {
-          "qNumber": 3,
-          "text": "A farmer bought 12 bags of fertilizer for MK 360,000. How much did 7 bags cost?",
-          "marks": 3
-        }
-      ]
-    },
-    {
-      "id": "paper-msce-bio-2023-p1",
-      "subjectId": "subj-bio",
-      "subjectName": "Biology",
-      "form": "Form 4",
-      "year": 2023,
+      "year": 2026,
       "paperNumber": "Paper 1 (Theory)",
       "category": "MSCE",
-      "title": "2023 MANEB MSCE Biology Paper 1",
-      "description": "National MSCE Biology examination paper covering physiology, genetics, plant transport, and ecology.",
-      "fileSizeMb": 1.9,
-      "downloadUrl": "/downloads/msce-bio-2023-p1.pdf",
+      "description": "Official MANEB examination paper with questions, instructions, and marks distribution.",
+      "fileSizeMb": 0.49,
+      "downloadUrl": "/downloads/past-papers/1790438119467-2024.pdf",
       "hasMarkingGuide": true,
-      "markingGuideSummary": "Includes required diagram labeling criteria and key biological terminology points.",
+      "markingGuideSummary": "Includes detailed step-by-step mark allocations and expected answers.",
       "offlineAvailable": true,
       "status": "published",
-      "downloadCount": 310,
-      "uploadedAt": "2024-02-18"
-    },
-    {
-      "id": "paper-msce-eng-2024-p2",
-      "subjectId": "subj-eng",
-      "subjectName": "English Language & Literature",
-      "form": "Form 4",
-      "year": 2024,
-      "paperNumber": "Paper 2 (Literature)",
-      "category": "MSCE",
-      "title": "2024 MANEB MSCE English Literature Paper",
-      "description": "Prose, Poetry, and Drama analysis for senior secondary students in Malawi.",
-      "fileSizeMb": 1.2,
-      "downloadUrl": "/downloads/msce-eng-2024-p2.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Essay grading rubric for contextual analysis, thematic exploration, and character development.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 198,
-      "uploadedAt": "2025-01-20"
-    },
-    {
-      "id": "paper-f1-math-term1-2024",
-      "subjectId": "subj-math",
-      "subjectName": "Mathematics",
-      "form": "Form 1",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Term 1)",
-      "category": "End of Term",
-      "title": "Form 1 Mathematics End of Term 1 Examination",
-      "description": "Secondary school Term 1 examination covering operations with directed numbers, HCF & LCM, fractions, decimals, and linear equations in one variable.",
-      "fileSizeMb": 1.1,
-      "downloadUrl": "/downloads/f1-math-term1-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Method marks (M1) awarded for clear working and accuracy marks (A1) for final simplified answers.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 380,
-      "uploadedAt": "2024-12-05",
+      "downloadCount": 2,
+      "uploadedAt": "2026-09-26",
       "questionsExcerpt": [
         {
           "qNumber": 1,
-          "text": "Evaluate: (-18) ÷ (-3) + (-4) × 2 without using a calculator.",
-          "marks": 3
-        },
-        {
-          "qNumber": 2,
-          "text": "Find the lowest common multiple (LCM) and highest common factor (HCF) of 24, 36, and 54 using prime factorisation.",
-          "marks": 5
-        },
-        {
-          "qNumber": 3,
-          "text": "Solve for x: 3(2x - 4) = 4x + 6.",
-          "marks": 4
-        },
-        {
-          "qNumber": 4,
-          "text": "A secondary school class in Zomba has 45 students. If the ratio of boys to girls is 2:3, calculate the number of girls in the class.",
-          "marks": 4
-        }
-      ]
-    },
-    {
-      "id": "paper-f1-chem-term2-2024",
-      "subjectId": "subj-chem",
-      "subjectName": "Chemistry",
-      "form": "Form 1",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Term 2)",
-      "category": "End of Term",
-      "title": "Form 1 Chemistry End of Term 2 Examination",
-      "description": "Summative paper assessing laboratory safety, apparatus, states of matter, kinetic theory, mixtures, and physical separation techniques.",
-      "fileSizeMb": 1.3,
-      "downloadUrl": "/downloads/f1-chem-term2-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Step-by-step marking guide covering separation technique justifications and particle arrangement diagrams.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 295,
-      "uploadedAt": "2024-12-08",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Name two laboratory hazards and describe the proper safety protocol when heating substances in a test tube.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "Using the kinetic theory of matter, explain why solids have a fixed volume while gases do not.",
-          "marks": 4
-        },
-        {
-          "qNumber": 3,
-          "text": "Describe how a pure sample of salt can be obtained from a sand and salt-water mixture in the laboratory.",
-          "marks": 6
-        }
-      ]
-    },
-    {
-      "id": "paper-f1-bio-promo-2024",
-      "subjectId": "subj-bio",
-      "subjectName": "Biology",
-      "form": "Form 1",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Year Promotional)",
-      "category": "End of Term",
-      "title": "Form 1 Biology End of Year Promotional Examination",
-      "description": "Annual promotional examination testing cell structure, magnification, light microscope handling, and characteristics of living things.",
-      "fileSizeMb": 1.5,
-      "downloadUrl": "/downloads/f1-bio-promo-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Includes strict criteria for biological diagram labels, clean continuous pencil lines, and correct plant vs animal cell comparisons.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 340,
-      "uploadedAt": "2024-12-10",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "State three structural differences between an onion epidermal plant cell and a human cheek animal cell.",
-          "marks": 3
-        },
-        {
-          "qNumber": 2,
-          "text": "If a specimen is viewed with an eyepiece of magnification x10 and an objective lens of x40, calculate total magnification.",
-          "marks": 2
-        },
-        {
-          "qNumber": 3,
-          "text": "Explain why chlorophyll is essential for the process of photosynthesis in green plants.",
-          "marks": 4
-        }
-      ]
-    },
-    {
-      "id": "paper-f1-phys-term3-2024",
-      "subjectId": "subj-physics",
-      "subjectName": "Physics",
-      "form": "Form 1",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Term 3)",
-      "category": "End of Term",
-      "title": "Form 1 Physics End of Term 3 Examination",
-      "description": "School assessment on measurement of length, area, volume, mass and density, vernier calipers, and basic pressure in liquids.",
-      "fileSizeMb": 1.4,
-      "downloadUrl": "/downloads/f1-phys-term3-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "GRASP method required for all density calculations with full SI units rewarded.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 270,
-      "uploadedAt": "2024-12-12",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Explain the difference between fundamental quantities and derived quantities, giving two examples of each.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "A rectangular stone block has dimensions 4 cm by 5 cm by 10 cm and a mass of 540 g. Calculate its density in g/cm³ and kg/m³.",
-          "marks": 5
-        }
-      ]
-    },
-    {
-      "id": "paper-f1-eng-midterm-2024",
-      "subjectId": "subj-eng",
-      "subjectName": "English Language & Literature",
-      "form": "Form 1",
-      "year": 2024,
-      "paperNumber": "Paper 1 (Mid-Term Test)",
-      "category": "Mid-Term",
-      "title": "Form 1 English Language Mid-Term Test",
-      "description": "Grammar mechanics, parts of speech, punctuation, comprehension passage, and short narrative composition.",
-      "fileSizeMb": 1,
-      "downloadUrl": "/downloads/f1-eng-midterm-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Mark scheme assessing sentence agreement, correct verb tenses, and paragraph transitions.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 220,
-      "uploadedAt": "2024-10-15"
-    },
-    {
-      "id": "paper-f2-bio-jce-2024",
-      "subjectId": "subj-bio",
-      "subjectName": "Biology",
-      "form": "Form 2",
-      "year": 2024,
-      "paperNumber": "Paper 1 (National JCE)",
-      "category": "JCE",
-      "title": "2024 MANEB JCE Biology Examination Paper",
-      "description": "Junior Certificate of Education national paper testing human digestion, respiratory gas exchange, blood circulation, and malaria prevention.",
-      "fileSizeMb": 1.6,
-      "downloadUrl": "/downloads/f2-bio-jce-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Complete model answers with enzyme action criteria and circulatory system diagrams.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 430,
-      "uploadedAt": "2025-01-08",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Name the enzyme produced in the stomach and state its optimum pH and function.",
-          "marks": 3
-        },
-        {
-          "qNumber": 2,
-          "text": "Describe four adaptations of the human alveoli that facilitate rapid diffusion of respiratory gases.",
-          "marks": 4
-        },
-        {
-          "qNumber": 3,
-          "text": "Explain how the use of treated mosquito nets interrupts the transmission cycle of Plasmodium in Malawi.",
-          "marks": 4
-        }
-      ]
-    },
-    {
-      "id": "paper-f2-chem-mock-2024",
-      "subjectId": "subj-chem",
-      "subjectName": "Chemistry",
-      "form": "Form 2",
-      "year": 2024,
-      "paperNumber": "Paper 1 (Cluster Mock)",
-      "category": "Mock",
-      "title": "Form 2 Zonal Cluster Mock Examination - Chemistry",
-      "description": "Joint cluster mock examination on atomic structure, electron configuration, chemical formulas, acids, bases, and salts.",
-      "fileSizeMb": 1.5,
-      "downloadUrl": "/downloads/f2-chem-mock-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Includes electronic configuration mark scheme and neutralization reaction balanced equations.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 310,
-      "uploadedAt": "2024-11-20",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "An element has atomic number 12 and mass number 24. Write its electronic configuration and deduce its group and period.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "Write a balanced chemical equation for the reaction between dilute hydrochloric acid and calcium carbonate (CaCO₃).",
-          "marks": 4
-        }
-      ]
-    },
-    {
-      "id": "paper-f2-phys-term2-2024",
-      "subjectId": "subj-physics",
-      "subjectName": "Physics",
-      "form": "Form 2",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Term 2)",
-      "category": "End of Term",
-      "title": "Form 2 Physics End of Term 2 Examination",
-      "description": "Term 2 examination assessing moments of forces, center of gravity, equilibrium, and simple machines (pulleys and levers).",
-      "fileSizeMb": 1.3,
-      "downloadUrl": "/downloads/f2-phys-term2-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Detailed marks for stating the principle of moments and calculating mechanical advantage and velocity ratio.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 285,
-      "uploadedAt": "2024-12-04",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "State the Principle of Moments. A uniform meter rule is balanced at its 50 cm mark with a 20 N load at the 20 cm mark. Where must a 30 N load be placed?",
+          "text": "Sample Question 1",
           "marks": 5
         },
         {
           "qNumber": 2,
-          "text": "Define mechanical advantage (MA) and velocity ratio (VR) of a machine.",
-          "marks": 3
+          "text": "Sample Question 2",
+          "marks": 10
         }
-      ]
-    },
-    {
-      "id": "paper-f3-math-term1-2024",
-      "subjectId": "subj-math",
-      "subjectName": "Mathematics",
-      "form": "Form 3",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Term 1)",
-      "category": "End of Term",
-      "title": "Form 3 Mathematics End of Term 1 Examination",
-      "description": "Senior secondary assessment covering quadratic equations, simultaneous equations, laws of indices, logarithms, and coordinate geometry.",
-      "fileSizeMb": 1.7,
-      "downloadUrl": "/downloads/f3-math-term1-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Full marking scheme for algebraic manipulation, completing the square, and graphical coordinate solutions.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 360,
-      "uploadedAt": "2024-12-06",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Solve the simultaneous equations: 2x + 3y = 13 and 5x - 2y = 4.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "Solve for x without using logarithm tables: log₁₀(x + 3) + log₁₀(x - 3) = log₁₀ 16.",
-          "marks": 4
-        },
-        {
-          "qNumber": 3,
-          "text": "Find the coordinates of the midpoint and the gradient of the line joining P(-3, 7) and Q(5, -1).",
-          "marks": 4
-        }
-      ]
-    },
-    {
-      "id": "paper-f3-chem-term2-2024",
-      "subjectId": "subj-chem",
-      "subjectName": "Chemistry",
-      "form": "Form 3",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Term 2)",
-      "category": "End of Term",
-      "title": "Form 3 Chemistry End of Term 2 Examination",
-      "description": "Stoichiometry, the mole concept, reacting masses, molar gas volume, chemical equilibrium, and redox reactions.",
-      "fileSizeMb": 1.6,
-      "downloadUrl": "/downloads/f3-chem-term2-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Step-by-step scoring of mole conversions, balancing redox half-equations, and equilibrium shifts.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 320,
-      "uploadedAt": "2024-12-09",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Calculate the mass of copper(II) sulfate formed when 4.0 g of copper(II) oxide completely reacts with excess dilute sulfuric acid: CuO + H₂SO₄ → CuSO₄ + H₂O.",
-          "marks": 5
-        },
-        {
-          "qNumber": 2,
-          "text": "Define oxidation and reduction in terms of electron transfer and oxidation numbers.",
-          "marks": 4
-        }
-      ]
-    },
-    {
-      "id": "paper-f3-phys-mock-2024",
-      "subjectId": "subj-physics",
-      "subjectName": "Physics",
-      "form": "Form 3",
-      "year": 2024,
-      "paperNumber": "Paper 1 (Cluster Assessment)",
-      "category": "Mock",
-      "title": "Form 3 Secondary Schools Cluster Test - Physics",
-      "description": "Joint secondary cluster assessment on kinematics, equations of uniformly accelerated motion, Newton laws, and electrical circuits.",
-      "fileSizeMb": 1.7,
-      "downloadUrl": "/downloads/f3-phys-mock-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Formula substitution guidelines, circuit diagram evaluation, and unit conformity.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 305,
-      "uploadedAt": "2024-11-25",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "A car accelerates uniformly from rest to 25 m/s in 10 seconds. Calculate its acceleration and the total distance covered.",
-          "marks": 5
-        },
-        {
-          "qNumber": 2,
-          "text": "Three resistors of 4 Ω, 6 Ω, and 12 Ω are connected in parallel across a 12 V battery. Calculate the effective resistance and the total circuit current.",
-          "marks": 5
-        }
-      ]
-    },
-    {
-      "id": "paper-f3-bio-promo-2024",
-      "subjectId": "subj-bio",
-      "subjectName": "Biology",
-      "form": "Form 3",
-      "year": 2024,
-      "paperNumber": "Paper 1 (End of Year Promotional)",
-      "category": "End of Term",
-      "title": "Form 3 Biology End of Year Promotional Examination",
-      "description": "Senior promotional exam testing excretion and osmoregulation, nephron anatomy, mammalian nervous coordination, and plant tropisms.",
-      "fileSizeMb": 1.8,
-      "downloadUrl": "/downloads/f3-bio-promo-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Nephron ultrafiltration and selective reabsorption marking points with clear biological keyword allocations.",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 315,
-      "uploadedAt": "2024-12-14",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Describe the processes of ultrafiltration and selective reabsorption in the human nephron.",
-          "marks": 6
-        },
-        {
-          "qNumber": 2,
-          "text": "Compare a reflex arc with a voluntary action, explaining why reflex actions protect the body from danger.",
-          "marks": 4
-        }
-      ]
-    },
-    {
-      "id": "paper-f4-math-mock-2024",
-      "subjectId": "subj-math",
-      "subjectName": "Mathematics",
-      "form": "Form 4",
-      "year": 2024,
-      "paperNumber": "Paper 2 (District Mock)",
-      "category": "Mock",
-      "title": "District Joint Mock Examination - Mathematics Paper 2",
-      "description": "Joint secondary school mock examination covering trigonometry, circle geometry theorems, probability, statistics, and 3D vectors.",
-      "fileSizeMb": 2.2,
-      "downloadUrl": "/downloads/f4-math-mock-2024.pdf",
-      "hasMarkingGuide": true,
-      "markingGuideSummary": "Section A & B breakdown with detailed geometrical deduction reasons (e.g. angle at center is twice angle at circumference).",
-      "offlineAvailable": true,
-      "status": "published",
-      "downloadCount": 450,
-      "uploadedAt": "2025-02-01",
-      "questionsExcerpt": [
-        {
-          "qNumber": 1,
-          "text": "Points A, B, and C lie on a circle center O. Angle AOC = 110°. Calculate the value of angle ABC and give a geometric reason.",
-          "marks": 4
-        },
-        {
-          "qNumber": 2,
-          "text": "A bag contains 5 red balls and 7 blue balls. Two balls are drawn at random without replacement. Calculate the probability that both balls are of different colors.",
-          "marks": 5
-        }
-      ]
+      ],
+      "fileName": "2024.pdf",
+      "fileSizeBytes": 513451,
+      "formLevel": "Form 4",
+      "hasMarkingScheme": true
     }
   ],
   "examTips": [
@@ -5235,6 +4664,204 @@
     "sponsorCtaUrl": "https://natbank.co.mw"
   },
   "auditLogs": [
+    {
+      "id": "audit-1790438223653-hfge",
+      "adminUsername": "Admin",
+      "action": "Uploaded Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-1790438217047",
+      "details": "Uploaded MSCE 2026 History Paper 1 (Theory)",
+      "timestamp": "2026-09-26T15:57:03.653Z"
+    },
+    {
+      "id": "audit-1790438126141-8npk",
+      "adminUsername": "Admin",
+      "action": "Uploaded Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-1790438097038",
+      "details": "Uploaded MSCE 2026 Agriculture Paper 1 (Theory)",
+      "timestamp": "2026-09-26T15:55:26.141Z"
+    },
+    {
+      "id": "audit-1790438096271-0tvg",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-msce-bio-2023-p1",
+      "details": "Removed past paper \"Biology 2023\"",
+      "timestamp": "2026-09-26T15:54:56.271Z"
+    },
+    {
+      "id": "audit-1790438092808-hs58",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f1-eng-midterm-2024",
+      "details": "Removed past paper \"English Language & Literature 2024\"",
+      "timestamp": "2026-09-26T15:54:52.808Z"
+    },
+    {
+      "id": "audit-1790438091254-zh9x",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f2-chem-mock-2024",
+      "details": "Removed past paper \"Chemistry 2024\"",
+      "timestamp": "2026-09-26T15:54:51.254Z"
+    },
+    {
+      "id": "audit-1790438089913-pmcb",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f3-phys-mock-2024",
+      "details": "Removed past paper \"Physics 2024\"",
+      "timestamp": "2026-09-26T15:54:49.913Z"
+    },
+    {
+      "id": "audit-1790438088826-97se",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f2-phys-term2-2024",
+      "details": "Removed past paper \"Physics 2024\"",
+      "timestamp": "2026-09-26T15:54:48.826Z"
+    },
+    {
+      "id": "audit-1790438087267-flxr",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f1-math-term1-2024",
+      "details": "Removed past paper \"Mathematics 2024\"",
+      "timestamp": "2026-09-26T15:54:47.267Z"
+    },
+    {
+      "id": "audit-1790438085905-f2qp",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f3-math-term1-2024",
+      "details": "Removed past paper \"Mathematics 2024\"",
+      "timestamp": "2026-09-26T15:54:45.905Z"
+    },
+    {
+      "id": "audit-1790438084735-bwfm",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f1-chem-term2-2024",
+      "details": "Removed past paper \"Chemistry 2024\"",
+      "timestamp": "2026-09-26T15:54:44.735Z"
+    },
+    {
+      "id": "audit-1790438083594-kxpr",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f3-chem-term2-2024",
+      "details": "Removed past paper \"Chemistry 2024\"",
+      "timestamp": "2026-09-26T15:54:43.594Z"
+    },
+    {
+      "id": "audit-1790438082523-chmv",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f1-bio-promo-2024",
+      "details": "Removed past paper \"Biology 2024\"",
+      "timestamp": "2026-09-26T15:54:42.523Z"
+    },
+    {
+      "id": "audit-1790438081397-b6lg",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f1-phys-term3-2024",
+      "details": "Removed past paper \"Physics 2024\"",
+      "timestamp": "2026-09-26T15:54:41.397Z"
+    },
+    {
+      "id": "audit-1790438080246-rc4c",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f3-bio-promo-2024",
+      "details": "Removed past paper \"Biology 2024\"",
+      "timestamp": "2026-09-26T15:54:40.246Z"
+    },
+    {
+      "id": "audit-1790438079058-ezi7",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-jce-math-2024-p1",
+      "details": "Removed past paper \"Mathematics 2024\"",
+      "timestamp": "2026-09-26T15:54:39.058Z"
+    },
+    {
+      "id": "audit-1790438077681-jadt",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f2-bio-jce-2024",
+      "details": "Removed past paper \"Biology 2024\"",
+      "timestamp": "2026-09-26T15:54:37.681Z"
+    },
+    {
+      "id": "audit-1790438076527-yt67",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-msce-math-2024-p1",
+      "details": "Removed past paper \"Mathematics 2024\"",
+      "timestamp": "2026-09-26T15:54:36.527Z"
+    },
+    {
+      "id": "audit-1790438043691-uwyt",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-msce-phys-2024-p1",
+      "details": "Removed past paper \"Physics 2024\"",
+      "timestamp": "2026-09-26T15:54:03.691Z"
+    },
+    {
+      "id": "audit-1790438042438-d0z3",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-msce-chem-2024-p1",
+      "details": "Removed past paper \"Chemistry 2024\"",
+      "timestamp": "2026-09-26T15:54:02.438Z"
+    },
+    {
+      "id": "audit-1790438040736-toyz",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-msce-eng-2024-p2",
+      "details": "Removed past paper \"English Language & Literature 2024\"",
+      "timestamp": "2026-09-26T15:54:00.736Z"
+    },
+    {
+      "id": "audit-1790438039236-zmwo",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-f4-math-mock-2024",
+      "details": "Removed past paper \"Mathematics 2024\"",
+      "timestamp": "2026-09-26T15:53:59.236Z"
+    },
+    {
+      "id": "audit-1790438037782-mkft",
+      "adminUsername": "Admin",
+      "action": "Deleted Past Paper",
+      "entityType": "PastPaper",
+      "entityId": "paper-1790436804745",
+      "details": "Removed past paper \"Agriculture 2026\"",
+      "timestamp": "2026-09-26T15:53:57.782Z"
+    },
     {
       "id": "audit-1790437091279-y459",
       "adminUsername": "Admin",

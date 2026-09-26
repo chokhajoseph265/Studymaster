@@ -37,6 +37,7 @@ import {
   INITIAL_PREMIUM_PLANS
 } from '../data/initialData';
 import { offlineStorage } from './offlineStorage';
+import { syncManager } from './syncManager';
 
 const API_BASE = '/api';
 
@@ -885,10 +886,22 @@ export class ApiClient {
   }
 
   public async saveAdminPastPaper(paper: Partial<PastPaper>, isEdit: boolean) {
+    let result: PastPaper;
     if (isEdit && paper.id) {
-      return this.request<PastPaper>(`/admin/past-papers/${paper.id}`, { method: 'PUT', body: JSON.stringify(paper) });
+      result = await this.request<PastPaper>(`/admin/past-papers/${paper.id}`, { method: 'PUT', body: JSON.stringify(paper) });
+    } else {
+      result = await this.request<PastPaper>('/admin/past-papers', { method: 'POST', body: JSON.stringify(paper) });
     }
-    return this.request<PastPaper>('/admin/past-papers', { method: 'POST', body: JSON.stringify(paper) });
+
+    if (result && result.status === 'published') {
+      try {
+        syncManager.broadcast('past_papers_updated', 'admin', { paper: result, action: isEdit ? 'updated' : 'published' });
+        syncManager.broadcast('announcements_updated', 'admin');
+      } catch (err) {
+        console.warn('Sync broadcast notice:', err);
+      }
+    }
+    return result;
   }
 
   public async deleteAdminPastPaper(id: string): Promise<{ success: boolean }> {

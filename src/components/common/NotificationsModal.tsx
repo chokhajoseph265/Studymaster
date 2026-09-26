@@ -24,7 +24,8 @@ export interface NotificationItem {
   isPinned?: boolean;
   createdAt: string;
   actionText?: string;
-  actionType?: 'past_papers' | 'planner' | 'chemistry' | 'leaderboard';
+  actionType?: 'past_papers' | 'planner' | 'chemistry' | 'leaderboard' | string;
+  targetPaperId?: string;
   attachment?: Announcement['attachment'];
 }
 
@@ -32,7 +33,7 @@ interface NotificationsModalProps {
   isOpen: boolean;
   onClose: () => void;
   announcements?: Announcement[];
-  onNavigateAction?: (actionType: string) => void;
+  onNavigateAction?: (actionType: string, paperId?: string) => void;
   readNotificationIds: string[];
   onMarkAsRead: (id: string) => void;
   onToggleRead?: (id: string) => void;
@@ -101,16 +102,22 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
 
   // Merge dynamic announcements with built-in curriculum notifications
   const allNotifications: NotificationItem[] = useMemo(() => {
-    const dynamicItems: NotificationItem[] = announcements.map((ann) => ({
-      id: ann.id,
-      title: ann.title,
-      message: ann.message,
-      type: ann.type === 'exam_alert' ? 'exam_alert' : ann.type === 'timetable' ? 'timetable' : 'announcement',
-      category: ann.category || 'Official Announcement',
-      isPinned: ann.isPinned,
-      createdAt: ann.createdAt || new Date().toISOString(),
-      attachment: ann.attachment
-    }));
+    const dynamicItems: NotificationItem[] = announcements.map((ann) => {
+      const isPastPaper = ann.category === 'Past Papers' || ann.actionType === 'past_papers' || ann.id.startsWith('ann-paper-');
+      return {
+        id: ann.id,
+        title: ann.title,
+        message: ann.message,
+        type: ann.type === 'exam_alert' ? 'exam_alert' : ann.type === 'timetable' ? 'timetable' : 'announcement',
+        category: ann.category || (isPastPaper ? 'Past Papers' : 'Official Announcement'),
+        isPinned: ann.isPinned,
+        createdAt: ann.createdAt || new Date().toISOString(),
+        actionText: ann.actionText || (isPastPaper ? 'View Past Paper' : undefined),
+        actionType: ann.actionType || (isPastPaper ? 'past_papers' : undefined),
+        targetPaperId: ann.targetPaperId,
+        attachment: ann.attachment
+      };
+    });
 
     // Combined unique list, pinned items first, then by date descending
     const combined = [...dynamicItems, ...BUILT_IN_NOTIFICATIONS];
@@ -301,7 +308,13 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
               return (
                 <div
                   key={notif.id}
-                  onClick={() => onMarkAsRead(notif.id)}
+                  onClick={() => {
+                    onMarkAsRead(notif.id);
+                    if (notif.actionType && onNavigateAction) {
+                      onClose();
+                      onNavigateAction(notif.actionType, notif.targetPaperId);
+                    }
+                  }}
                   className={`p-3.5 sm:p-4 rounded-2xl border transition-all cursor-pointer relative ${
                     isRead
                       ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
@@ -390,7 +403,7 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
                               e.stopPropagation();
                               onMarkAsRead(notif.id);
                               onClose();
-                              onNavigateAction(notif.actionType!);
+                              onNavigateAction(notif.actionType!, notif.targetPaperId);
                             }}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-2xs transition-colors cursor-pointer"
                           >
