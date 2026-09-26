@@ -237,13 +237,20 @@ export class ApiClient {
     }
   }
 
-  public async getPastPapers(subjectId?: string, form?: string, year?: number, category?: string): Promise<PastPaper[]> {
+  public async getPastPapers(
+    subjectId?: string,
+    form?: string,
+    year?: number,
+    category?: string,
+    includeDrafts?: boolean
+  ): Promise<PastPaper[]> {
     return this.request<PastPaper[]>(
       `/content/past-papers?${new URLSearchParams({
         ...(subjectId ? { subjectId } : {}),
         ...(form ? { form } : {}),
         ...(year ? { year: year.toString() } : {}),
-        ...(category ? { category } : {})
+        ...(category ? { category } : {}),
+        ...(includeDrafts ? { includeDrafts: 'true' } : {})
       }).toString()}`
     );
   }

@@ -32,12 +32,14 @@ interface PastPaperStudioProps {
   subjects: Subject[];
   onBack: () => void;
   showToast: (msg: string) => void;
+  onSwitchToStudent?: () => void;
 }
 
 export const PastPaperStudio: React.FC<PastPaperStudioProps> = ({
   subjects,
   onBack,
-  showToast
+  showToast,
+  onSwitchToStudent
 }) => {
   const [papers, setPapers] = useState<PastPaper[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -68,7 +70,7 @@ export const PastPaperStudio: React.FC<PastPaperStudioProps> = ({
   const loadPapers = async () => {
     try {
       setLoading(true);
-      const data = await api.getPastPapers();
+      const data = await api.getPastPapers(undefined, undefined, undefined, undefined, true);
       setPapers(data || []);
     } catch (err) {
       console.warn('Failed to load past papers:', err);
@@ -348,7 +350,10 @@ export const PastPaperStudio: React.FC<PastPaperStudioProps> = ({
       const payload: Partial<PastPaper> = {
         ...editingPaper,
         subjectName: subj?.name || editingPaper.subjectName || 'General',
+        form: editingPaper.form || editingPaper.formLevel || 'Form 4',
+        formLevel: editingPaper.form || editingPaper.formLevel || 'Form 4',
         hasMarkingGuide: editingPaper.hasMarkingGuide ?? true,
+        hasMarkingScheme: editingPaper.hasMarkingGuide ?? true,
         offlineAvailable: editingPaper.offlineAvailable ?? true,
         status: editingPaper.status || 'published',
         year: Number(editingPaper.year) || new Date().getFullYear(),
@@ -356,7 +361,11 @@ export const PastPaperStudio: React.FC<PastPaperStudioProps> = ({
       };
 
       await api.saveAdminPastPaper(payload, isEdit);
-      showToast(isEdit ? 'Past paper updated successfully!' : 'New past paper published!');
+      showToast(
+        payload.status === 'published'
+          ? (isEdit ? 'Paper updated and published to student app!' : 'Paper published! Now live in the student app.')
+          : 'Draft paper saved.'
+      );
       setShowEditorModal(false);
       setEditingPaper(null);
       await loadPapers();
@@ -453,8 +462,20 @@ export const PastPaperStudio: React.FC<PastPaperStudioProps> = ({
           </div>
         </div>
 
-        {/* Action Button */}
+        {/* Action Buttons */}
         <div className="flex items-center gap-2 self-start sm:self-auto">
+          {onSwitchToStudent && (
+            <button
+              type="button"
+              onClick={onSwitchToStudent}
+              className="px-3.5 py-2.5 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
+              title="Switch to Student App to view how papers appear to students"
+            >
+              <Eye className="w-4 h-4 text-emerald-600" />
+              <span>View in Student App</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={handleOpenCreate}

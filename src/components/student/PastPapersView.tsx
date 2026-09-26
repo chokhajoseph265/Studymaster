@@ -11,6 +11,8 @@ import {
   ExternalLink,
   ChevronRight,
   Eye,
+  Download,
+  RefreshCw,
   X
 } from 'lucide-react';
 import { PastPaper, Subject, FormLevel } from '../../types';
@@ -21,13 +23,14 @@ import { INITIAL_SUBJECTS } from '../../data/initialData';
 
 interface PastPapersViewProps {
   onBack?: () => void;
+  initialPaperId?: string;
 }
 
-export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
+export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack, initialPaperId }) => {
   const { activeForm, user, triggerCelebration } = useAuth();
 
   const [papers, setPapers] = useState<PastPaper[]>([]);
-  const [selectedForm, setSelectedForm] = useState<string>(activeForm || 'all');
+  const [selectedForm, setSelectedForm] = useState<string>('all');
   const [subjectsList, setSubjectsList] = useState<Subject[]>(() =>
     INITIAL_SUBJECTS.filter((s) => !activeForm || s.forms.includes(activeForm)).sort((a, b) => a.name.localeCompare(b.name))
   );
@@ -36,9 +39,28 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
   const [selectedYear, setSelectedYear] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
   // Paper preview modal
   const [previewPaper, setPreviewPaper] = useState<PastPaper | null>(null);
+
+  const fetchPapers = async (showSpinner: boolean = true) => {
+    if (showSpinner) setLoading(true);
+    try {
+      const data = await api.getPastPapers(
+        selectedSubjectId === 'all' ? undefined : selectedSubjectId,
+        selectedForm === 'all' ? undefined : selectedForm,
+        selectedYear === 'all' ? undefined : parseInt(selectedYear),
+        selectedCategory === 'all' ? undefined : selectedCategory
+      );
+      setPapers(data || []);
+    } catch (e) {
+      console.warn('Past papers load error:', e);
+    } finally {
+      if (showSpinner) setLoading(false);
+      setIsRefreshing(false);
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -58,24 +80,52 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
   }, [selectedForm]);
 
   useEffect(() => {
-    const fetchPapers = async () => {
-      setLoading(true);
-      try {
-        const data = await api.getPastPapers(
-          selectedSubjectId === 'all' ? undefined : selectedSubjectId,
-          selectedForm === 'all' ? undefined : selectedForm,
-          selectedYear === 'all' ? undefined : parseInt(selectedYear),
-          selectedCategory === 'all' ? undefined : selectedCategory
-        );
-        setPapers(data);
-      } catch (e) {
-        console.warn('Past papers load error:', e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPapers();
+    fetchPapers(true);
   }, [selectedForm, selectedSubjectId, selectedCategory, selectedYear]);
+
+  // Open initial paper modal if requested
+  useEffect(() => {
+    if (initialPaperId && papers.length > 0) {
+      const target = papers.find((p) => p.id === initialPaperId);
+      if (target) {
+        setPreviewPaper(target);
+      }
+    }
+  }, [initialPaperId, papers]);
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await fetchPapers(false);
+  };
+
+  const handleDownloadPaper = async (paper: PastPaper) => {
+    try {
+      await api.downloadPastPaper(paper.id);
+      if (triggerCelebration) triggerCelebration();
+    } catch {}
+
+    if (paper.downloadUrl) {
+      window.open(paper.downloadUrl, '_blank');
+    } else {
+      // Create a printable text fallback view if no binary PDF was uploaded
+      const blob = new Blob(
+        [
+          `StudyMaster Malawi - ${paper.title}\n` +
+          `Subject: ${paper.subjectName}\n` +
+          `Year: ${paper.year} | Category: ${paper.category} | Form: ${paper.form || paper.formLevel || 'Form 4'}\n\n` +
+          `DESCRIPTION / SYLLABUS SCOPE:\n${paper.description}\n\n` +
+          `MARKING GUIDE:\n${paper.markingGuideSummary || paper.markingSchemeSummary || 'No marking guide specified.'}\n`
+        ],
+        { type: 'text/plain;charset=utf-8' }
+      );
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${paper.title.replace(/[^a-zA-Z0-9_-]/g, '_')}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  };
 
   const filteredPapers = papers.filter((p) => {
     if (!searchQuery) return true;
@@ -133,16 +183,51 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
 
       {/* Filter Controls */}
       <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs space-y-3">
-        {/* Search Bar */}
-        <div className="relative">
-          <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400 dark:text-slate-500" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search papers by subject, term, year, or school..."
-            className="w-full pl-10 pr-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 transition-all"
-          />
+        {/* Search Bar & Refresh */}
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
+            <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400 dark:text-slate-500" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search papers by subject, term, year, or school..."
+              className="w-full pl-10 pr-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 transition-all"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={handleRefresh}
+            title="Refresh latest published past papers"
+            className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer border border-slate-200 dark:border-slate-700 shrink-0"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-emerald-600' : ''}`} />
+            <span className="hidden sm:inline">Refresh</span>
+          </button>
+        </div>
+
+        {/* Quick Form Selector Pills */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+          {[
+            { id: 'all', label: 'All Forms' },
+            { id: 'Form 1', label: 'Form 1' },
+            { id: 'Form 2', label: 'Form 2 (JCE)' },
+            { id: 'Form 3', label: 'Form 3' },
+            { id: 'Form 4', label: 'Form 4 (MSCE)' }
+          ].map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setSelectedForm(f.id)}
+              className={`px-3 py-1.5 rounded-xl font-bold transition-all whitespace-nowrap cursor-pointer ${
+                selectedForm === f.id
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
         </div>
 
         {/* Filter Grid */}
@@ -248,7 +333,7 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
                         {paper.category} • {paper.year}
                       </span>
                       <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700">
-                        {paper.form}
+                        {paper.form || paper.formLevel || 'Form 4'}
                       </span>
                       <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                         {paper.subjectName}
@@ -266,7 +351,7 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
                     </p>
 
                     <div className="flex items-center gap-3 mt-2 text-[11px] text-slate-500 dark:text-slate-400 font-medium">
-                      <span>Approx {paper.fileSizeMb} MB</span>
+                      <span>Approx {paper.fileSizeMb || 1.5} MB</span>
                       <span>•</span>
                       <span>Includes Marking Guide & Worked Answers</span>
                     </div>
@@ -278,10 +363,18 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
                   <button
                     type="button"
                     onClick={() => setPreviewPaper(paper)}
-                    className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                    className="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                   >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>View Paper & Questions</span>
+                    <Eye className="w-3.5 h-3.5 text-slate-500" />
+                    <span>View Questions</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDownloadPaper(paper)}
+                    className="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Get PDF</span>
                   </button>
                 </div>
               </div>
@@ -306,7 +399,7 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
                   <h3 className="text-sm font-extrabold">{previewPaper.title}</h3>
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 px-1.5 py-0.2 rounded border border-emerald-800/60">
-                      {previewPaper.form}
+                      {previewPaper.form || previewPaper.formLevel || 'Form 4'}
                     </span>
                     <span className="text-[10px] text-slate-300">
                       {previewPaper.category} • {previewPaper.paperNumber}
@@ -329,13 +422,17 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
                 <p className="text-slate-600 dark:text-slate-300">{previewPaper.description}</p>
               </div>
 
-              {previewPaper.sampleQuestions && previewPaper.sampleQuestions.length > 0 && (
+              {((previewPaper.questionsExcerpt && previewPaper.questionsExcerpt.length > 0) ||
+                (previewPaper.sampleQuestions && previewPaper.sampleQuestions.length > 0)) && (
                 <div>
                   <h4 className="font-black text-slate-900 dark:text-white uppercase tracking-wider mb-2">
-                    Sample Official Questions:
+                    Official Examination Questions:
                   </h4>
                   <div className="space-y-2">
-                    {previewPaper.sampleQuestions.map((q: any, i) => (
+                    {(previewPaper.questionsExcerpt && previewPaper.questionsExcerpt.length > 0
+                      ? previewPaper.questionsExcerpt
+                      : previewPaper.sampleQuestions!
+                    ).map((q: any, i) => (
                       <div key={i} className="p-3.5 rounded-xl bg-white dark:bg-slate-850 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200">
                         <strong className="text-emerald-800 dark:text-emerald-400">Q{typeof q === 'object' && q.qNumber ? q.qNumber : i + 1}.</strong>{' '}
                         {typeof q === 'string' ? q : q.text}{' '}
@@ -348,22 +445,37 @@ export const PastPapersView: React.FC<PastPapersViewProps> = ({ onBack }) => {
                 </div>
               )}
 
-              {previewPaper.markingSchemeSummary && (
+              {(previewPaper.markingGuideSummary || previewPaper.markingSchemeSummary) && (
                 <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-950 dark:text-emerald-200">
                   <h4 className="font-black mb-1">Official Marking Guide & Solutions Criteria:</h4>
-                  <p className="leading-relaxed">{previewPaper.markingSchemeSummary}</p>
+                  <p className="leading-relaxed">
+                    {previewPaper.markingGuideSummary || previewPaper.markingSchemeSummary}
+                  </p>
                 </div>
               )}
             </div>
 
-            <div className="p-4 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700 flex items-center justify-end">
-              <button
-                type="button"
-                onClick={() => setPreviewPaper(null)}
-                className="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-bold text-xs cursor-pointer shadow-xs transition"
-              >
-                Close
-              </button>
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3">
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                {previewPaper.fileSizeMb || 1.5} MB PDF • {previewPaper.downloadCount || 0} downloads
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPreviewPaper(null)}
+                  className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 font-bold text-xs cursor-pointer transition"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDownloadPaper(previewPaper)}
+                  className="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-bold text-xs cursor-pointer shadow-xs transition flex items-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download / Open PDF</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

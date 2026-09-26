@@ -1586,6 +1586,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               setScreenHistory(['forms']);
             }}
             showToast={showToast}
+            onSwitchToStudent={onSwitchToStudent}
           />
         )}
 

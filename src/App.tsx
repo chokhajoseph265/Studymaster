@@ -168,6 +168,7 @@ const AppContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('home');
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
+  const [selectedPastPaper, setSelectedPastPaper] = useState<PastPaper | null>(null);
   const [activeQuiz, setActiveQuiz] = useState<Quiz | null>(null);
   const [assistPrefillQuery, setAssistPrefillQuery] = useState<string>('');
   const [showExamTips, setShowExamTips] = useState<boolean>(false);
@@ -484,8 +485,9 @@ const AppContent: React.FC = () => {
                 onBack={() => setSelectedSubject(null)}
                 onSelectTopic={(topic) => setSelectedTopic(topic)}
                 onStartQuiz={(quiz) => setActiveQuiz(quiz)}
-                onSelectPastPaper={() => {
+                onSelectPastPaper={(paper) => {
                   setSelectedSubject(null);
+                  setSelectedPastPaper(paper);
                   setActiveTab('past_papers');
                 }}
                 onAskAssist={(topicTitle) => {
@@ -520,7 +522,14 @@ const AppContent: React.FC = () => {
                     setShowExamTips(false);
                   }}
                   onOpenAssist={() => setActiveTab('assist')}
-                  onOpenPastPapers={() => setActiveTab('past_papers')}
+                  onOpenPastPapers={() => {
+                    setSelectedPastPaper(null);
+                    setActiveTab('past_papers');
+                  }}
+                  onSelectPastPaper={(paper) => {
+                    setSelectedPastPaper(paper);
+                    setActiveTab('past_papers');
+                  }}
                   onOpenLeaderboard={() => setActiveTab('leaderboard')}
                   onOpenExamTips={() => setShowExamTips(true)}
                   onOpenTopic={handleOpenTopic}
@@ -551,7 +560,13 @@ const AppContent: React.FC = () => {
 
               {activeTab === 'past_papers' && (
                 <div className="px-4 py-4">
-                  <PastPapersView />
+                  <PastPapersView
+                    initialPaperId={selectedPastPaper?.id}
+                    onBack={() => {
+                      setSelectedPastPaper(null);
+                      setActiveTab('home');
+                    }}
+                  />
                 </div>
               )}
 
@@ -670,7 +685,8 @@ const AppContent: React.FC = () => {
             setSelectedTopic(t);
             setShowSearchModal(false);
           }}
-          onSelectPastPaper={(_p) => {
+          onSelectPastPaper={(p) => {
+            setSelectedPastPaper(p);
             setActiveTab('past_papers');
             setShowSearchModal(false);
           }}

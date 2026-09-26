@@ -56,7 +56,7 @@ export const SubjectDetailView: React.FC<SubjectDetailViewProps> = ({
         const [topicsData, quizzesData, papersData] = await Promise.all([
           api.getTopics(subject.id, activeForm),
           api.getQuizzes(undefined, subject.id, activeForm),
-          api.getPastPapers(subject.id, activeForm)
+          api.getPastPapers(subject.id)
         ]);
         setTopics(topicsData);
         setQuizzes(quizzesData);
@@ -449,7 +449,7 @@ export const SubjectDetailView: React.FC<SubjectDetailViewProps> = ({
                 </div>
               ) : (
                 <div className="p-6 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
-                  No past papers uploaded for {subject.name} {activeForm} yet.
+                  No past papers uploaded for {subject.name} yet.
                 </div>
               )}
             </div>

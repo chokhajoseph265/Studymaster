@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Play,
   Calendar,
   BookMarked,
   Edit3,
   X,
-  RotateCcw
+  RotateCcw,
+  FileText,
+  ChevronRight,
+  GraduationCap
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { Subject, FormLevel, Announcement } from '../../types';
+import { Subject, FormLevel, Announcement, PastPaper } from '../../types';
 import { INITIAL_SUBJECTS, INITIAL_TOPICS } from '../../data/initialData';
+import { api } from '../../services/api';
 
 interface StudentDashboardProps {
   onSelectSubject?: (subject: Subject) => void;
   onOpenSubjects?: () => void;
   onOpenAssist?: () => void;
   onOpenPastPapers?: () => void;
+  onSelectPastPaper?: (paper: PastPaper) => void;
   onOpenLeaderboard?: () => void;
   onOpenExamTips: () => void;
   onOpenTopic: (topicId: string, subjectId: string) => void;
@@ -27,6 +32,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   onOpenSubjects,
   onOpenAssist: _onOpenAssist,
   onOpenPastPapers: _onOpenPastPapers,
+  onSelectPastPaper,
   onOpenLeaderboard: _onOpenLeaderboard,
   onOpenExamTips: _onOpenExamTips,
   onOpenTopic,
@@ -116,6 +122,27 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   const msceCountdown = calculateCountdown(msceDate);
   const jceCountdown = calculateCountdown(jceDate);
   const isSenior = activeForm === 'Form 3' || activeForm === 'Form 4';
+
+  // Load recently published past papers so students see them immediately
+  const [recentPapers, setRecentPapers] = useState<PastPaper[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    api
+      .getPastPapers()
+      .then((papers) => {
+        if (isMounted && papers) {
+          const published = papers.filter(
+            (p) => p.status !== 'draft' && p.status !== 'deactivated'
+          );
+          setRecentPapers(published.slice(0, 3));
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="space-y-6 pb-24 px-4 pt-3 bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-100 transition-colors">
@@ -314,6 +341,82 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
           </div>
         </div>
       </section>
+
+      {/* 4. LATEST PUBLISHED PAST PAPERS */}
+      {recentPapers.length > 0 && (
+        <section className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-8 rounded-xl bg-purple-100 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 flex items-center justify-center font-bold">
+                <FileText className="w-4 h-4" />
+              </span>
+              <div>
+                <h2 className="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <span>Latest Published Past Papers</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 font-extrabold border border-purple-200 dark:border-purple-800">
+                    MANEB
+                  </span>
+                </h2>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  Official national MSCE, JCE, and mock examination papers
+                </p>
+              </div>
+            </div>
+
+            {_onOpenPastPapers && (
+              <button
+                type="button"
+                onClick={_onOpenPastPapers}
+                className="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <span>View All Papers</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {recentPapers.map((paper) => (
+              <div
+                key={paper.id}
+                onClick={() => {
+                  if (onSelectPastPaper) {
+                    onSelectPastPaper(paper);
+                  } else if (_onOpenPastPapers) {
+                    _onOpenPastPapers();
+                  }
+                }}
+                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-600 transition-all cursor-pointer shadow-2xs hover:shadow-md flex flex-col justify-between space-y-2.5 group"
+              >
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-[10px] font-bold">
+                    <span className="px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 font-extrabold">
+                      {paper.year} • {paper.category}
+                    </span>
+                    <span className="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                      {paper.form || paper.formLevel || 'Form 4'}
+                    </span>
+                  </div>
+                  <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-2">
+                    {paper.title}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 font-medium">
+                    {paper.subjectName} • {paper.paperNumber || 'Paper 1'}
+                  </p>
+                </div>
+
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px]">
+                  <span className="text-slate-400 font-semibold">{paper.fileSizeMb || 1.5} MB PDF</span>
+                  <span className="text-purple-700 dark:text-purple-400 font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>Practice Paper</span>
+                    <ChevronRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* EXAM START DATE PICKER MODAL */}
       {editingExam && (

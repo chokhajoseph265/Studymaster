@@ -254,7 +254,8 @@ async function startServer() {
     const form = req.query.form as string | undefined;
     const year = req.query.year ? parseInt(req.query.year as string) : undefined;
     const category = req.query.category as string | undefined;
-    res.json(db.getPastPapers(subjectId, form, year, category));
+    const includeDrafts = req.query.includeDrafts === 'true';
+    res.json(db.getPastPapers(subjectId, form, year, category, includeDrafts));
   });
 
   app.post('/api/content/past-papers/:id/download', (req: Request, res: Response) => {

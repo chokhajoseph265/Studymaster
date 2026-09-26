@@ -615,10 +615,16 @@ class StudyMasterDatabase {
     return this.db.quizzes.find((q) => q.id === id);
   }
 
-  public getPastPapers(subjectId?: string, form?: string, year?: number, category?: string) {
-    let list = this.db.pastPapers.filter((p) => p.status !== 'deactivated');
+  public getPastPapers(subjectId?: string, form?: string, year?: number, category?: string, includeDrafts: boolean = false) {
+    let list = this.db.pastPapers.filter((p) => {
+      if (p.status === 'deactivated') return false;
+      if (!includeDrafts && p.status === 'draft') return false;
+      return true;
+    });
     if (subjectId && subjectId !== 'all') list = list.filter((p) => p.subjectId === subjectId);
-    if (form && form !== 'all') list = list.filter((p) => p.form === form);
+    if (form && form !== 'all') {
+      list = list.filter((p) => p.form === form || p.formLevel === form);
+    }
     if (year) list = list.filter((p) => p.year === year);
     if (category && category !== 'all') {
       if (category === 'MANEB') {
@@ -627,7 +633,11 @@ class StudyMasterDatabase {
         list = list.filter((p) => p.category === category);
       }
     }
-    return list.sort((a, b) => b.year - a.year);
+    return list.sort((a, b) => {
+      const yearDiff = (b.year || 0) - (a.year || 0);
+      if (yearDiff !== 0) return yearDiff;
+      return (b.uploadedAt || '').localeCompare(a.uploadedAt || '');
+    });
   }
 
   public getPastPaperById(id: string) {
@@ -1114,7 +1124,14 @@ class StudyMasterDatabase {
   }
 
   public addPastPaper(paper: PastPaper, adminUsername: string) {
-    this.db.pastPapers.push(paper);
+    const existingIdx = this.db.pastPapers.findIndex((p) => p.id === paper.id);
+    if (existingIdx !== -1) {
+      this.db.pastPapers[existingIdx] = { ...this.db.pastPapers[existingIdx], ...paper };
+      this.logAdminAction(adminUsername, 'Updated Past Paper', 'PastPaper', paper.id, `Updated ${paper.category} ${paper.year} ${paper.subjectName}`);
+      this.persist();
+      return this.db.pastPapers[existingIdx];
+    }
+    this.db.pastPapers.unshift(paper);
     this.logAdminAction(adminUsername, 'Uploaded Past Paper', 'PastPaper', paper.id, `Uploaded ${paper.category} ${paper.year} ${paper.subjectName} ${paper.paperNumber}`);
     this.persist();
     return paper;
