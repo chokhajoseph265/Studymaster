@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#dc2626" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle with subtle shadow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGrad)" />
+  <circle cx="256" cy="256" r="236" fill="none" stroke="#ffffff" stroke-width="4" stroke-opacity="0.3" />
+
+  <!-- Malawi Rising Sun Crest behind book -->
+  <g transform="translate(256, 175)">
+    <!-- Sun Rays -->
+    <path d="M0 -75 L0 -100" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+    <path d="M-40 -65 L-55 -85" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+    <path d="M40 -65 L55 -85" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+    <path d="M-70 -35 L-95 -45" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+    <path d="M70 -35 L95 -45" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+    <path d="M-80 0 L-105 0" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+    <path d="M80 0 L105 0" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+    <!-- Sun Semi-circle -->
+    <path d="M -70 0 A 70 70 0 0 1 70 0 Z" fill="url(#sunGrad)" />
+  </g>
+
+  <!-- Open Book Symbol -->
+  <g fill="#ffffff">
+    <!-- Left Page -->
+    <path d="M 250 220 C 190 205 130 220 90 235 L 90 350 C 130 335 190 320 250 335 Z" fill="#ffffff" />
+    <!-- Right Page -->
+    <path d="M 262 220 C 322 205 382 220 422 235 L 422 350 C 382 335 322 320 262 335 Z" fill="#f1f5f9" />
+    <!-- Page lines left -->
+    <path d="M 125 260 C 160 250 205 250 235 258" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" fill="none" />
+    <path d="M 125 285 C 160 275 205 275 235 283" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" fill="none" />
+    <path d="M 125 310 C 160 300 205 300 235 308" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" fill="none" />
+    <!-- Page lines right -->
+    <path d="M 277 258 C 307 250 352 250 387 260" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" fill="none" />
+    <path d="M 277 283 C 307 275 352 275 387 285" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" fill="none" />
+    <path d="M 277 308 C 307 300 352 300 387 310" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" fill="none" />
+    <!-- Book Spine -->
+    <path d="M 250 220 L 262 220 L 262 342 L 250 342 Z" fill="#94a3b8" />
+  </g>
+
+  <!-- Golden Academic Pen / Quill at center -->
+  <g transform="translate(256, 260)">
+    <!-- Pen Body -->
+    <polygon points="-6,-60 6,-60 4,40 0,60 -4,40" fill="url(#goldGrad)" />
+    <!-- Nib tip -->
+    <polygon points="-2,45 2,45 0,65" fill="#1e293b" />
+    <!-- Nib line -->
+    <line x1="0" y1="45" x2="0" y2="58" stroke="#ffffff" stroke-width="1.5" />
+    <!-- Grip band -->
+    <rect x="-6" y="-10" width="12" height="6" fill="#1e293b" rx="1" />
+  </g>
+
+  <!-- Bottom Stars / Acclaim -->
+  <g fill="#fbbf24">
+    <polygon points="256,380 260,392 272,392 262,400 266,412 256,404 246,412 250,400 240,392 252,392" transform="translate(0, 0) scale(0.9) translate(28, 42)" />
+    <polygon points="256,380 260,392 272,392 262,400 266,412 256,404 246,412 250,400 240,392 252,392" transform="translate(-50, -5) scale(0.7) translate(110, 160)" />
+    <polygon points="256,380 260,392 272,392 262,400 266,412 256,404 246,412 250,400 240,392 252,392" transform="translate(50, -5) scale(0.7) translate(-36, 160)" />
+  </g>
+</svg>

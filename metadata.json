@@ -1,0 +1,8 @@
+{
+  "name": "StudyMaster",
+  "description": "Comprehensive educational platform and Android study companion for secondary school students across Malawi (Forms 1–4). Features notes, lessons, summaries, worked examples, practice quizzes, past exam papers, offline library, internal StudyMaster Assist, gamified leaderboards, points, badges, Focus Mode, and Admin Dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

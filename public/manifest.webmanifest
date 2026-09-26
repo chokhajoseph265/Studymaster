@@ -1,0 +1,83 @@
+{
+  "id": "/?app=student",
+  "short_name": "StudyMaster",
+  "name": "StudyMaster",
+  "description": "Offline-first secondary school study companion for Form 1–4, JCE & MSCE in Malawi, featuring syllabus notes, past exam papers, quizzes, and StudyMaster Assist AI Tutor.",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "48x48 72x72 96x96 128x128 144x144 152x152 192x192 256x256 384x384 512x512",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/?app=student",
+  "scope": "/",
+  "background_color": "#064e3b",
+  "theme_color": "#059669",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "categories": ["education", "books", "productivity"],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Syllabus Notes & Topics",
+      "short_name": "Study Notes",
+      "description": "Read Form 1–4 curriculum notes and worked examples",
+      "url": "/",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "StudyMaster Assist AI Tutor",
+      "short_name": "AI Tutor",
+      "description": "Ask questions and get patient step-by-step teacher explanations",
+      "url": "/?tab=assist",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "MSCE Past Papers",
+      "short_name": "Past Papers",
+      "description": "Practice MANEB national examination past papers",
+      "url": "/?tab=past-papers",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Scientific Calculator",
+      "short_name": "Calculator",
+      "description": "MANEB Math and Science Calculator",
+      "url": "/?calc=open",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

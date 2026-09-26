@@ -1,0 +1,549 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+/* ==========================================================================
+   GLOBAL TYPOGRAPHY & CRAFT FOUNDATIONS
+   ========================================================================== */
+
+:root {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: inherit;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dark body {
+  background-color: #090d16;
+  color: #f1f5f9;
+}
+
+/* Crisp Selection Styling */
+::selection {
+  background-color: #a7f3d0;
+  color: #064e3b;
+}
+
+.dark ::selection {
+  background-color: #065f46;
+  color: #ecfdf5;
+}
+
+/* Subtle, Modern Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* Utility to hide scrollbars smoothly */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   BATTERY & POWER SAVER STYLES (StudyMaster Malawi Eco-Engine)
+   ========================================================================== */
+
+/* 1. True AMOLED Pure Black Mode (#000000) for OLED/AMOLED pixel shutoff */
+html.amoled-theme,
+html.amoled-theme body,
+html.amoled-theme #root,
+html.amoled-theme main,
+html.amoled-theme aside,
+html.amoled-theme article,
+html.amoled-theme section {
+  background-color: #000000 !important;
+  color: #f8fafc !important;
+}
+
+/* OLED Pure Black Background Overrides for EVERY Card & Text Container */
+html.amoled-theme [class*="bg-white"],
+html.amoled-theme [class*="bg-neutral-50"],
+html.amoled-theme [class*="bg-neutral-100"],
+html.amoled-theme [class*="bg-neutral-200"],
+html.amoled-theme [class*="bg-neutral-800"],
+html.amoled-theme [class*="bg-neutral-900"],
+html.amoled-theme [class*="bg-neutral-950"],
+html.amoled-theme [class*="bg-slate-50"],
+html.amoled-theme [class*="bg-slate-100"],
+html.amoled-theme [class*="bg-slate-200"],
+html.amoled-theme [class*="bg-slate-800"],
+html.amoled-theme [class*="bg-slate-900"],
+html.amoled-theme [class*="bg-slate-950"],
+html.amoled-theme [class*="bg-zinc-50"],
+html.amoled-theme [class*="bg-zinc-100"],
+html.amoled-theme [class*="bg-zinc-800"],
+html.amoled-theme [class*="bg-zinc-900"],
+html.amoled-theme [class*="bg-zinc-950"],
+html.amoled-theme [class*="bg-gray-50"],
+html.amoled-theme [class*="bg-gray-100"],
+html.amoled-theme [class*="bg-gray-800"],
+html.amoled-theme [class*="bg-gray-900"],
+html.amoled-theme [class*="bg-[#f8fafc]"],
+html.amoled-theme [class*="bg-[#f0fdf4]"],
+html.amoled-theme [class*="bg-emerald-50"],
+html.amoled-theme [class*="bg-emerald-100"],
+html.amoled-theme [class*="bg-emerald-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="bg-amber-50"],
+html.amoled-theme [class*="bg-amber-100"],
+html.amoled-theme [class*="bg-amber-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="bg-sky-50"],
+html.amoled-theme [class*="bg-sky-100"],
+html.amoled-theme [class*="bg-sky-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="bg-blue-50"],
+html.amoled-theme [class*="bg-blue-100"],
+html.amoled-theme [class*="bg-blue-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="bg-indigo-50"],
+html.amoled-theme [class*="bg-indigo-950"],
+html.amoled-theme [class*="bg-teal-50"],
+html.amoled-theme [class*="bg-teal-100"],
+html.amoled-theme [class*="bg-teal-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="bg-red-50"],
+html.amoled-theme [class*="bg-red-100"],
+html.amoled-theme [class*="bg-red-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="dark:bg-slate-"],
+html.amoled-theme [class*="dark:bg-neutral-"],
+html.amoled-theme [class*="dark:bg-zinc-"],
+html.amoled-theme [class*="dark:bg-emerald-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="dark:bg-amber-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="dark:bg-sky-950"]:not(button):not([class*="w-"]):not([class*="h-"]),
+html.amoled-theme [class*="dark:bg-blue-950"]:not(button):not([class*="w-"]):not([class*="h-"]) {
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Neutralize All Gradients behind text so text always sits on true black */
+html.amoled-theme [class*="bg-gradient-"]:not(button):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]),
+html.amoled-theme [class*="from-"]:not(button):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]),
+html.amoled-theme [class*="via-"]:not(button):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]),
+html.amoled-theme [class*="to-"]:not(button):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]) {
+  background-image: none !important;
+  background-color: #000000 !important;
+}
+
+/* AMOLED Card & Container Borders (crisp, clean visibility on black canvas) */
+html.amoled-theme .border,
+html.amoled-theme [class*="border-neutral-"],
+html.amoled-theme [class*="border-slate-"],
+html.amoled-theme [class*="border-zinc-"],
+html.amoled-theme [class*="border-gray-"] {
+  border-color: #27272a !important; /* Visible clean zinc-800 border */
+}
+
+/* Subject & Pedagogical Callout Borders on AMOLED */
+html.amoled-theme [class*="border-emerald-"] {
+  border-color: #047857 !important; /* Luminous emerald-700 */
+}
+html.amoled-theme [class*="border-amber-"] {
+  border-color: #b45309 !important; /* Luminous amber-700 */
+}
+html.amoled-theme [class*="border-sky-"],
+html.amoled-theme [class*="border-blue-"] {
+  border-color: #0284c7 !important; /* Luminous sky-600 */
+}
+html.amoled-theme [class*="border-red-"] {
+  border-color: #b91c1c !important; /* Luminous red-700 */
+}
+html.amoled-theme [class*="border-teal-"] {
+  border-color: #0f766e !important; /* Luminous teal-700 */
+}
+
+html.amoled-theme header,
+html.amoled-theme nav {
+  background-color: #000000 !important;
+  border-color: #27272a !important;
+}
+
+/* ==========================================================================
+   AMOLED TYPOGRAPHY CONTRAST ENGINE (Zero Invisible Text)
+   ========================================================================== */
+
+/* 1. Deep Black / Darkest Text classes mapped to luminous white/slate */
+html.amoled-theme .text-neutral-950:not([class*="bg-amber"]):not([class*="bg-yellow"]):not([class*="bg-emerald-4"]):not([class*="bg-emerald-5"]),
+html.amoled-theme .text-slate-950:not([class*="bg-amber"]):not([class*="bg-yellow"]):not([class*="bg-emerald-4"]):not([class*="bg-emerald-5"]),
+html.amoled-theme .text-black:not([class*="bg-amber"]):not([class*="bg-yellow"]):not([class*="bg-emerald-4"]):not([class*="bg-emerald-5"]) {
+  color: #f8fafc !important;
+}
+
+html.amoled-theme .text-neutral-900,
+html.amoled-theme .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+html.amoled-theme .text-neutral-800,
+html.amoled-theme .text-slate-800 {
+  color: #e2e8f0 !important;
+}
+
+html.amoled-theme .text-neutral-700,
+html.amoled-theme .text-slate-700 {
+  color: #cbd5e1 !important;
+}
+
+html.amoled-theme .text-neutral-600,
+html.amoled-theme .text-slate-600,
+html.amoled-theme .text-neutral-500,
+html.amoled-theme .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html.amoled-theme .text-neutral-400,
+html.amoled-theme .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+/* 2. Deep colored headings, callout texts & formula labels */
+html.amoled-theme .text-emerald-950,
+html.amoled-theme .text-emerald-900 {
+  color: #6ee7b7 !important; /* Bright emerald-300 */
+}
+html.amoled-theme .text-emerald-800,
+html.amoled-theme .text-emerald-700 {
+  color: #34d399 !important; /* Vibrant emerald-400 */
+}
+
+html.amoled-theme .text-amber-950,
+html.amoled-theme .text-amber-900 {
+  color: #fde68a !important; /* Bright amber-200 */
+}
+html.amoled-theme .text-amber-800,
+html.amoled-theme .text-amber-700 {
+  color: #fbbf24 !important; /* Vibrant amber-400 */
+}
+
+html.amoled-theme .text-sky-950,
+html.amoled-theme .text-sky-900,
+html.amoled-theme .text-blue-950,
+html.amoled-theme .text-blue-900 {
+  color: #7dd3fc !important; /* Bright sky-300 */
+}
+html.amoled-theme .text-sky-800,
+html.amoled-theme .text-sky-700,
+html.amoled-theme .text-blue-800,
+html.amoled-theme .text-blue-700 {
+  color: #38bdf8 !important; /* Vibrant sky-400 */
+}
+
+html.amoled-theme .text-red-950,
+html.amoled-theme .text-red-900 {
+  color: #fca5a5 !important; /* Bright red-300 */
+}
+html.amoled-theme .text-red-800,
+html.amoled-theme .text-red-700 {
+  color: #f87171 !important; /* Vibrant red-400 */
+}
+
+html.amoled-theme .text-teal-950,
+html.amoled-theme .text-teal-900 {
+  color: #5eead4 !important; /* Bright teal-300 */
+}
+html.amoled-theme .text-teal-800,
+html.amoled-theme .text-teal-700 {
+  color: #2dd4bf !important; /* Vibrant teal-400 */
+}
+
+/* 3. Mathematical & Chemical KaTeX Equations on AMOLED */
+html.amoled-theme .katex,
+html.amoled-theme .katex-display,
+html.amoled-theme .katex-html,
+html.amoled-theme .katex * {
+  color: #f8fafc !important;
+}
+
+html.amoled-theme .katex-error {
+  color: #f87171 !important;
+}
+
+/* 4. Form inputs, textareas, search bars, selects on AMOLED */
+html.amoled-theme input,
+html.amoled-theme textarea,
+html.amoled-theme select {
+  background-color: #000000 !important;
+  color: #f8fafc !important;
+  border-color: #27272a !important;
+}
+
+html.amoled-theme input::placeholder,
+html.amoled-theme textarea::placeholder {
+  color: #737373 !important;
+}
+
+html.amoled-theme select option {
+  background-color: #000000 !important;
+  color: #f8fafc !important;
+}
+
+/* 5. Textbook tables on AMOLED */
+html.amoled-theme table {
+  background-color: #000000 !important;
+  border-color: #27272a !important;
+}
+
+html.amoled-theme tbody tr {
+  background-color: #000000 !important;
+}
+
+html.amoled-theme tbody tr:hover {
+  background-color: #0a1f18 !important;
+}
+
+html.amoled-theme td,
+html.amoled-theme th {
+  color: #f8fafc !important;
+  border-color: #27272a !important;
+  background-color: #000000 !important;
+}
+
+/* 2. Low-Glare Amber Night Mode in AMOLED (Zero Blue Light) */
+html.amber-night-mode,
+html.amber-night-mode body {
+  color: #fbbf24 !important;
+}
+
+html.amber-night-mode .text-neutral-950,
+html.amber-night-mode .text-slate-950,
+html.amber-night-mode .text-neutral-900,
+html.amber-night-mode .text-neutral-800,
+html.amber-night-mode .text-neutral-700,
+html.amber-night-mode .text-slate-900,
+html.amber-night-mode .text-slate-800,
+html.amber-night-mode .text-emerald-950,
+html.amber-night-mode .text-amber-950,
+html.amber-night-mode .text-sky-950,
+html.amber-night-mode .text-emerald-900,
+html.amber-night-mode .text-amber-900 {
+  color: #f59e0b !important;
+}
+
+html.amber-night-mode .text-neutral-500,
+html.amber-night-mode .text-neutral-400,
+html.amber-night-mode .text-slate-500,
+html.amber-night-mode .text-slate-400 {
+  color: #d97706 !important;
+}
+
+html.amber-night-mode .katex,
+html.amber-night-mode .katex-display,
+html.amber-night-mode .katex-html,
+html.amber-night-mode .katex * {
+  color: #f59e0b !important;
+}
+
+/* 3. Extreme Low-Battery / Eco Mode: Freeze animations & reduce GPU/CPU cycles */
+html.eco-mode-active *,
+html.eco-mode-active *::before,
+html.eco-mode-active *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* 4. Minimalist E-Reader Sepia Paper */
+.e-reader-sepia {
+  background-color: #fbf0d9 !important;
+  color: #433422 !important;
+}
+
+.e-reader-sepia h1,
+.e-reader-sepia h2,
+.e-reader-sepia h3,
+.e-reader-sepia h4 {
+  color: #2b1f11 !important;
+}
+
+/* ==========================================================================
+   STUDYMASTER INCLUSIVE ACCESSIBILITY STYLES
+   ========================================================================== */
+
+/* 1. Text Sizing Adjustments (Scales all rem-based typography cleanly) */
+html.access-text-large {
+  font-size: 115% !important;
+}
+
+html.access-text-xl {
+  font-size: 130% !important;
+}
+
+html.access-text-large body,
+html.access-text-xl body {
+  line-height: 1.6;
+}
+
+/* 2. Dyslexia-Friendly Typography (Enhanced Legibility, Spacing, and Left-Aligned Flow) */
+html.access-dyslexia,
+html.access-dyslexia body,
+html.access-dyslexia button,
+html.access-dyslexia input,
+html.access-dyslexia select,
+html.access-dyslexia textarea,
+html.access-dyslexia h1,
+html.access-dyslexia h2,
+html.access-dyslexia h3,
+html.access-dyslexia h4,
+html.access-dyslexia h5,
+html.access-dyslexia h6,
+html.access-dyslexia p,
+html.access-dyslexia li,
+html.access-dyslexia label,
+html.access-dyslexia span {
+  font-family: 'OpenDyslexic', 'Atkinson Hyperlegible', 'Lexend', 'Comic Sans MS', 'Trebuchet MS', system-ui, -apple-system, sans-serif !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.15em !important;
+  line-height: 1.85 !important;
+  text-align: left !important;
+}
+
+/* 3. High-Contrast Low-Vision Theme (WCAG AAA Luminous Yellow-on-Black) */
+html.access-high-contrast,
+html.access-high-contrast body {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+html.access-high-contrast * {
+  border-color: #ffff00 !important;
+}
+
+/* Force dark containers to true black */
+html.access-high-contrast div,
+html.access-high-contrast section,
+html.access-high-contrast article,
+html.access-high-contrast aside,
+html.access-high-contrast header,
+html.access-high-contrast nav,
+html.access-high-contrast footer,
+html.access-high-contrast main,
+html.access-high-contrast dialog {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+/* Typography in High Contrast */
+html.access-high-contrast p,
+html.access-high-contrast span,
+html.access-high-contrast h1,
+html.access-high-contrast h2,
+html.access-high-contrast h3,
+html.access-high-contrast h4,
+html.access-high-contrast h5,
+html.access-high-contrast h6,
+html.access-high-contrast li,
+html.access-high-contrast label,
+html.access-high-contrast strong,
+html.access-high-contrast b,
+html.access-high-contrast i,
+html.access-high-contrast em {
+  color: #ffff00 !important;
+}
+
+/* Interactive Buttons */
+html.access-high-contrast button {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+html.access-high-contrast button.bg-emerald-600,
+html.access-high-contrast button.bg-emerald-700,
+html.access-high-contrast button.bg-emerald-800,
+html.access-high-contrast button.bg-blue-600,
+html.access-high-contrast button.bg-amber-500,
+html.access-high-contrast button[type='submit'] {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  border-color: #ffff00 !important;
+}
+
+html.access-high-contrast button.bg-emerald-600 *,
+html.access-high-contrast button.bg-emerald-700 *,
+html.access-high-contrast button.bg-emerald-800 *,
+html.access-high-contrast button.bg-blue-600 *,
+html.access-high-contrast button.bg-amber-500 *,
+html.access-high-contrast button[type='submit'] * {
+  color: #000000 !important;
+}
+
+/* Inputs, Textareas, Selects */
+html.access-high-contrast input,
+html.access-high-contrast textarea,
+html.access-high-contrast select {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Hyperlinks */
+html.access-high-contrast a {
+  color: #38bdf8 !important;
+  text-decoration: underline !important;
+}
+
+/* KaTeX Mathematics Formulas in High Contrast */
+html.access-high-contrast .katex,
+html.access-high-contrast .katex * {
+  color: #ffff00 !important;
+}
+
+/* SVG icons */
+html.access-high-contrast svg {
+  stroke: #ffff00 !important;
+}
+
+html.access-high-contrast button.bg-emerald-600 svg,
+html.access-high-contrast button.bg-emerald-700 svg,
+html.access-high-contrast button.bg-emerald-800 svg,
+html.access-high-contrast button.bg-blue-600 svg,
+html.access-high-contrast button.bg-amber-500 svg,
+html.access-high-contrast button[type='submit'] svg {
+  stroke: #000000 !important;
+}
+
+/* 4. Large Touch Targets (Min 48px hit areas for motor assistance) */
+html.access-large-targets button,
+html.access-large-targets a,
+html.access-large-targets input[type='button'],
+html.access-large-targets input[type='submit'],
+html.access-large-targets select,
+html.access-large-targets [role='button'] {
+  min-height: 48px !important;
+  min-width: 48px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
